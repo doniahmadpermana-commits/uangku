@@ -1,8 +1,8 @@
 // Naikkan versi ini setiap kali file aplikasi diubah supaya HP mengambil versi baru.
-const CACHE = 'moneysalsa-v4';
+const CACHE = 'uangku-v1';
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest', 'firebase-config.js',
-  'icons/icon.svg', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png',
+  'icons/icon.svg', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png', 'vendor/fonts/plus-jakarta-sans.woff2',
   'vendor/firebase/firebase-app.js', 'vendor/firebase/firebase-auth.js', 'vendor/firebase/firebase-firestore.js',
 ];
 
