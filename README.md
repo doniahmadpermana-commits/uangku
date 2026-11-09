@@ -3,7 +3,7 @@
 Aplikasi catatan keuangan pribadi yang simpel. Gratis, tanpa iklan, bisa offline, dan **tidak wajib daftar**.
 Berbentuk **web app (PWA)**, jadi bisa dipasang di **Android** maupun **iPhone** tanpa Play Store / App Store.
 
-👉 **Buka:** <https://doniahmadpermana-commits.github.io/moneysalsa/>
+👉 **Buka:** <https://doniahmadpermana-commits.github.io/uangku/>
 
 ## Cara pakai
 1. Buka alamat di atas.
