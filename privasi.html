@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kebijakan Privasi · Uangku</title>
+<meta name="description" content="Data apa yang disimpan Uangku, di mana, siapa yang bisa mengaksesnya, dan cara menghapusnya.">
+<meta name="theme-color" content="#f4f5fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0e16" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<style>
+@font-face {
+  font-family: 'Jakarta';
+  src: url('vendor/fonts/plus-jakarta-sans.woff2') format('woff2');
+  font-weight: 200 800; font-display: swap;
+}
+:root {
+  --bg: #f4f5fa; --card: #fff; --text: #16152b; --muted: #6f6f8a; --line: #ebebf3;
+  --primary: #5a48dc; --primary-soft: #eeebff;
+  --shadow: 0 1px 2px rgba(22, 21, 43, .04), 0 6px 20px rgba(22, 21, 43, .05);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e0e16; --card: #181824; --text: #f2f2f8; --muted: #9c9cb4; --line: #262636;
+    --primary: #8f80ff; --primary-soft: #262145; --shadow: none; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font: 15px/1.65 'Jakarta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: calc(16px + env(safe-area-inset-top)) 0 calc(32px + env(safe-area-inset-bottom));
+}
+.wrap { max-width: 680px; margin: 0 auto; padding: 0 18px; }
+a { color: var(--primary); font-weight: 600; }
+.back {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 14px;
+  background: var(--card); box-shadow: var(--shadow); border-radius: 999px; padding: 8px 14px 8px 10px;
+}
+.back svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.03em; margin: 26px 0 6px; }
+.meta { color: var(--muted); font-size: 13.5px; margin: 0 0 18px; }
+.summary { background: var(--primary-soft); border-radius: 20px; padding: 16px 18px; margin: 0 0 18px; }
+.summary b { display: block; margin-bottom: 6px; }
+.summary ul { margin: 0; padding-left: 20px; }
+section { background: var(--card); box-shadow: var(--shadow); border-radius: 20px; padding: 18px 20px; margin: 12px 0; }
+h2 { font-size: 17px; letter-spacing: -.01em; margin: 0 0 6px; }
+section p { margin: 6px 0; }
+section ul { margin: 6px 0; padding-left: 20px; }
+li { margin: 3px 0; }
+.foot { text-align: center; color: var(--muted); font-size: 13px; margin-top: 22px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Kembali ke Uangku</a>
+
+  <h1>Kebijakan Privasi</h1>
+  <p class="meta">Berlaku sejak 9 November 2026</p>
+
+  <div class="summary">
+    <b>Singkatnya</b>
+    <ul>
+      <li>Uangku gratis, <strong>tanpa iklan</strong>, dan <strong>tanpa pelacak / analitik</strong>.</li>
+      <li>Datamu <strong>tidak dijual</strong> dan tidak dibagikan untuk iklan atau pemasaran.</li>
+      <li>Tanpa akun, data hanya ada di perangkatmu. Dengan akun, data disimpan di server Google (Firebase).</li>
+      <li>Kamu bisa menghapus semua data dan akunmu kapan saja dari menu <strong>Atur</strong>.</li>
+    </ul>
+  </div>
+
+  <section>
+    <h2>1. Data yang dicatat</h2>
+    <p>Uangku hanya menyimpan apa yang kamu isi sendiri:</p>
+    <ul>
+      <li>Catatan transaksi: jumlah, jenis (masuk / keluar / pindah), kategori, tanggal, dan catatan.</li>
+      <li>Dompet (nama, ikon, saldo awal), kategori buatan sendiri, dan budget bulanan.</li>
+      <li>Jika membuat akun: alamat email dan password.</li>
+    </ul>
+    <p>Uangku tidak meminta nama asli, nomor HP, lokasi, kontak, atau akses ke rekening bank / e-wallet-mu.
+      Saldo di aplikasi hanyalah angka yang kamu catat sendiri.</p>
+  </section>
+
+  <section>
+    <h2>2. Tanpa akun</h2>
+    <p>Semua data tersimpan di penyimpanan browser di perangkatmu dan <strong>tidak dikirim ke server mana pun</strong>.
+      Data ini bisa hilang jika kamu menghapus aplikasi, data situs, atau riwayat browser, atau jika perangkat hilang.
+      Gunakan <strong>Atur → Backup data</strong> secara berkala.</p>
+  </section>
+
+  <section>
+    <h2>3. Dengan akun</h2>
+    <ul>
+      <li>Email dan password dikelola oleh <strong>Firebase Authentication</strong> (Google). Password disimpan dalam bentuk
+        terenkripsi oleh Google; pengelola Uangku tidak bisa melihatnya.</li>
+      <li>Data catatanmu disimpan di <strong>Cloud Firestore</strong> (Google Cloud) di region Jakarta
+        (<em>asia-southeast2</em>), supaya bisa dibuka dari beberapa perangkat.</li>
+      <li>Data dikirim lewat koneksi terenkripsi (HTTPS) dan disimpan terenkripsi oleh Google.</li>
+      <li>Email yang dikirim hanya email sistem: verifikasi email dan reset password. Tidak ada email promosi.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Siapa yang bisa melihat datamu</h2>
+    <ul>
+      <li><strong>Pengguna lain tidak bisa.</strong> Aturan keamanan database membatasi setiap akun hanya bisa membaca dan
+        mengubah datanya sendiri.</li>
+      <li><strong>Pengelola Uangku</strong> secara teknis bisa mengakses data di database melalui konsol Firebase, karena
+        datamu tidak dienkripsi end-to-end. Kami tidak membuka data pengguna, kecuali kamu sendiri yang meminta bantuan
+        terkait datamu atau diwajibkan oleh hukum yang berlaku.</li>
+      <li><strong>Google</strong> memproses data sebagai penyedia layanan (Firebase / Google Cloud) sesuai
+        <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">ketentuan privasi Firebase</a>.</li>
+      <li>Situs ini di-hosting oleh <strong>GitHub Pages</strong>, yang dapat mencatat data teknis standar seperti alamat IP
+        saat halaman dibuka.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. Menghapus data</h2>
+    <ul>
+      <li><strong>Atur → Hapus semua data</strong>: menghapus semua catatan, dompet, dan kategori. Jika sedang masuk akun,
+        data di cloud ikut terhapus dari semua perangkat.</li>
+      <li><strong>Atur → Hapus akun &amp; semua datanya</strong>: menghapus akun beserta seluruh datanya di cloud secara
+        permanen.</li>
+      <li>Tanpa akun: hapus aplikasi atau data situs di browser.</li>
+    </ul>
+    <p>Penghapusan bersifat permanen dan tidak bisa dibatalkan. Buat backup dulu jika masih perlu.</p>
+  </section>
+
+  <section>
+    <h2>6. Batasan layanan</h2>
+    <p>Uangku adalah layanan gratis yang disediakan <em>sebagaimana adanya</em>. Kami berusaha menjaga data tetap aman,
+      tetapi tidak ada sistem yang kebal dari gangguan, dan server tidak menyimpan cadangan otomatis. Simpan backup
+      berkala (aplikasi akan mengingatkan setiap bulan). Uangku bukan aplikasi bank dan tidak terhubung ke rekeningmu.</p>
+  </section>
+
+  <section>
+    <h2>7. Perubahan & kontak</h2>
+    <p>Kebijakan ini bisa diperbarui sewaktu-waktu; tanggal berlaku di atas akan ikut berubah.
+      Pertanyaan atau permintaan terkait data bisa disampaikan lewat
+      <a href="https://github.com/doniahmadpermana-commits/uangku/issues" target="_blank" rel="noopener">halaman Issues proyek Uangku di GitHub</a>.
+      Jangan menulis data pribadi atau isi catatan keuanganmu di sana, karena halaman itu publik.</p>
+  </section>
+
+  <p class="foot">Uangku · gratis, tanpa iklan, bisa offline</p>
+</div>
+</body>
+</html>

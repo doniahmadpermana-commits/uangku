@@ -22,7 +22,9 @@ Berbentuk **web app (PWA)**, jadi bisa dipasang di **Android** maupun **iPhone**
 - Riwayat dengan pencarian & filter, ketuk catatan untuk ubah / hapus
 - Laporan bulanan per kategori, budget bulanan
 - Backup / pulihkan (`.json`) dan export ke Excel (`.csv`)
-- **Akun opsional** (email + password): data aman di cloud & sama di semua HP yang masuk
+- **Akun opsional** (email + password, dengan verifikasi email): data aman di cloud & sama di semua HP yang masuk
+- Pengingat backup bulanan, dan **hapus akun** beserta semua datanya dari menu Atur
+- [Kebijakan Privasi](privasi.html)
 - Mode gelap otomatis
 
 Tanpa akun, data tersimpan di HP itu saja. Dengan akun, data yang sudah dicatat ikut terunggah saat

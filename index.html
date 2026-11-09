@@ -38,6 +38,7 @@
   --out-soft: #fdeced;
   --tr-soft: #eaf1ff;
   --tr: #3567e0;
+  --warn-soft: #fff4e0;
   --shadow: 0 1px 2px rgba(22, 21, 43, .04), 0 6px 20px rgba(22, 21, 43, .05);
   --radius: 20px;
   color-scheme: light;
@@ -60,6 +61,7 @@
     --out-soft: #3a1e24;
     --tr-soft: #1c2744;
     --tr: #7ea2ff;
+    --warn-soft: #3a2e16;
     --shadow: none;
     color-scheme: dark;
   }
@@ -232,6 +234,13 @@ header.top {
 .acc .badge { width: 46px; height: 46px; border-radius: 16px; display: grid; place-items: center; background: var(--primary-soft); color: var(--primary); flex: none; }
 .acc .badge svg.i { width: 24px; height: 24px; }
 .foot { text-align: center; color: var(--faint); font-size: 12.5px; margin: 22px 0 8px; }
+.foot a, .legal a { color: var(--primary); font-weight: 600; text-decoration: none; }
+.legal { text-align: center; color: var(--muted); font-size: 12.5px; margin: 10px 0 0; }
+.verify { background: var(--warn-soft); border-radius: 16px; padding: 14px; margin-top: 14px; font-size: 13.5px; }
+.verify b { display: block; margin-bottom: 2px; }
+.verify .vbtns { display: flex; gap: 8px; margin-top: 10px; }
+.verify .vbtns .btn { padding: 11px 12px; font-size: 13.5px; }
+.verify .vbtns .btn.soft { background: var(--card); }
 
 /* ---------- tombol ---------- */
 .btn { border: 0; border-radius: 16px; padding: 15px 18px; font-weight: 700; font-size: 15px; width: 100%; }
@@ -373,6 +382,7 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
 .tip { background: var(--primary-soft); color: var(--text); border-radius: 16px; padding: 12px 14px; font-size: 13.5px; margin: 4px 0 14px; display: flex; gap: 10px; align-items: flex-start; }
 .tip .x { margin-left: auto; border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; padding: 0 0 0 6px; }
 .tip a { color: var(--primary); font-weight: 700; }
+.tip .tbtn { border: 0; background: var(--primary); color: #fff; border-radius: 10px; padding: 7px 12px; font-weight: 700; font-size: 13px; margin-top: 8px; }
 @media (min-width: 560px) { .wcard { min-width: 150px; } }
 </style>
 </head>
@@ -413,6 +423,10 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
   <!-- BERANDA -->
   <section id="view-home">
     <div class="tip hidden" id="installTip"></div>
+    <div class="tip hidden" id="verifyTip"><span>📧</span><span>Verifikasi emailmu supaya akun bisa dipulihkan kalau lupa password.
+      <a href="#" data-go="settings">Lihat caranya</a></span></div>
+    <div class="tip hidden" id="backupTip"><span>🗂️</span><span><span id="backupTipText"></span><br>
+      <button class="tbtn" id="backupNow">Backup sekarang</button></span><button class="x" id="backupLater" aria-label="Nanti">×</button></div>
 
     <div class="hero">
       <div class="k" id="hLabel">Total uang kamu</div>
@@ -483,8 +497,15 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
           <div class="muted small" id="accDesc"></div>
         </div>
       </div>
+      <div class="verify hidden" id="verifyBox">
+        <b>📧 Verifikasi email kamu</b>
+        Link verifikasi sudah dikirim ke <b style="display:inline" id="vEmail"></b>. Buka emailnya (cek juga folder Spam)
+        lalu klik link itu, supaya akun bisa dipulihkan kalau lupa password.
+        <div class="vbtns"><button class="btn soft" id="vCheck">Sudah, cek lagi</button><button class="btn link" id="vResend">Kirim ulang</button></div>
+      </div>
       <button class="btn primary" id="btnLogin" style="margin-top:14px">Masuk / Daftar gratis</button>
       <button class="btn soft hidden" id="btnLogout" style="margin-top:14px">Keluar dari akun</button>
+      <button class="btn danger-link hidden" id="btnDeleteAcc" style="margin-top:4px;width:100%">Hapus akun & semua datanya</button>
     </div>
 
     <div class="card">
@@ -518,7 +539,7 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
       <button class="set-item danger" id="btnWipe"><span class="e"><svg class="i"><use href="#i-trash"/></svg></span><span class="grow">Hapus semua data</span></button>
       <input type="file" id="fileIn" accept=".json,application/json" class="hidden">
     </div>
-    <p class="foot">Uangku · gratis, tanpa iklan, bisa offline</p>
+    <p class="foot">Uangku · gratis, tanpa iklan, bisa offline<br><a href="privasi.html">Kebijakan Privasi</a></p>
   </section>
 </main>
 
@@ -609,6 +630,7 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
     <button type="submit" class="btn primary" id="aBtn">Daftar</button>
   </div>
   <button type="button" class="btn link hidden" id="aForgot">Lupa password?</button>
+  <p class="legal">Dengan mendaftar, kamu setuju dengan <a href="privasi.html" target="_blank" rel="noopener">Kebijakan Privasi</a>.</p>
 </form>
 
 <!-- perkenalan -->
@@ -626,6 +648,7 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
       <div class="grow"></div>
       <button class="btn primary" data-ob="next">Mulai</button>
       <button class="btn link hidden" id="obLogin">Sudah punya akun? Masuk</button>
+      <p class="legal">Dengan melanjutkan, kamu setuju dengan <a href="privasi.html" target="_blank" rel="noopener">Kebijakan Privasi</a>.</p>
     </div>
 
     <div class="step hidden" data-step="1">
@@ -758,6 +781,7 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
   let fb = null;   // { auth, fs, user, m } saat sudah masuk
   let fbm = null;  // { auth, m } begitu modul Firebase termuat
   let authMode = 'signup';
+  let unsubs = [];
 
   const COLS = {
     tx: ['id','type','cat','amount','date','note','wallet','to','created','updated'],
@@ -824,7 +848,6 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
       m.fs.connectFirestoreEmulator(fs, '127.0.0.1', 8080);
     }
     fbm = { auth, m };
-    let unsubs = [];
     m.auth.onAuthStateChanged(auth, user => {
       unsubs.forEach(u => u()); unsubs = [];
       if (!user) {
@@ -833,6 +856,7 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
         return;
       }
       fb = { auth, fs, user, m };
+      if (!user.emailVerified) user.reload().then(render).catch(() => {});
       closeAuth(); closeOnboard();
       // Data yang dicatat sebelum masuk ikut diunggah. Saat masuk ke akun lama tanpa transaksi
       // baru, dompet dari perkenalan tidak diunggah supaya tidak dobel.
@@ -923,6 +947,11 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
       $('#hIn').textContent = fmt(tin);
       $('#hOut').textContent = fmt(tout);
       $('#wallets').innerHTML = walletsBlock();
+      $('#verifyTip').classList.toggle('hidden', !fb || fb.user.emailVerified);
+      const due = backupDue();
+      $('#backupTip').classList.toggle('hidden', !due);
+      if (due) $('#backupTipText').textContent = (+ls.get('moneysalsa.lastBackup') ? 'Sudah sebulan sejak backup terakhir.' : 'Kamu belum pernah backup.')
+        + ' Simpan cadangan datamu, untuk jaga-jaga.';
       const bc = $('#budgetCard');
       if (db.budget > 0) {
         bc.classList.remove('hidden', 'warn', 'over');
@@ -990,6 +1019,9 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
       $('#accountCard').classList.toggle('hidden', !CLOUD);
       $('#btnLogin').classList.toggle('hidden', !!fb);
       $('#btnLogout').classList.toggle('hidden', !fb);
+      $('#btnDeleteAcc').classList.toggle('hidden', !fb);
+      $('#verifyBox').classList.toggle('hidden', !fb || fb.user.emailVerified);
+      if (fb) $('#vEmail').textContent = fb.user.email || '';
       $('#accTitle').textContent = fb ? (fb.user.email || 'Akun') : 'Pakai di beberapa HP?';
       $('#accDesc').textContent = fb ? 'Tersimpan di cloud & otomatis sama di semua HP.'
         : 'Buat akun gratis supaya data aman di cloud dan bisa dibuka di HP lain. Tidak wajib.';
@@ -1271,10 +1303,12 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
     const btn = $('#aBtn'), label = btn.textContent;
     $('#aErr').textContent = ''; btn.disabled = true; btn.textContent = 'Sebentar…';
     try {
-      if (authMode === 'signup') await fbm.m.auth.createUserWithEmailAndPassword(fbm.auth, email, pass);
-      else await fbm.m.auth.signInWithEmailAndPassword(fbm.auth, email, pass);
+      if (authMode === 'signup') {
+        const cred = await fbm.m.auth.createUserWithEmailAndPassword(fbm.auth, email, pass);
+        await fbm.m.auth.sendEmailVerification(cred.user).catch(() => {});
+      } else await fbm.m.auth.signInWithEmailAndPassword(fbm.auth, email, pass);
       $('#aPass').value = '';
-      toast(authMode === 'signup' ? 'Akun dibuat — data kamu sekarang tersinkron ✓' : 'Berhasil masuk ✓');
+      toast(authMode === 'signup' ? 'Akun dibuat ✓ Cek email untuk verifikasi' : 'Berhasil masuk ✓');
     } catch (err) { $('#aErr').textContent = authErr(err); }
     btn.disabled = false; btn.textContent = label;
   });
@@ -1283,6 +1317,48 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
     if (!email) { $('#aErr').textContent = 'Isi email dulu, lalu tekan "Lupa password?" lagi.'; return; }
     try { await fbm.m.auth.sendPasswordResetEmail(fbm.auth, email); $('#aErr').textContent = ''; toast('Link ganti password dikirim ke email'); }
     catch (err) { $('#aErr').textContent = authErr(err); }
+  };
+  $('#vCheck').onclick = async () => {
+    if (!fb) return;
+    try { await fb.user.reload(); } catch (e) { toast('Tidak ada koneksi internet'); return; }
+    toast(fb.user.emailVerified ? 'Email terverifikasi ✓' : 'Belum terverifikasi. Cek inbox / folder Spam.');
+    render();
+  };
+  $('#vResend').onclick = async () => {
+    if (!fb) return;
+    try { await fb.m.auth.sendEmailVerification(fb.user); toast('Link verifikasi dikirim ulang'); }
+    catch (err) { toast(authErr(err)); }
+  };
+  // Hapus akun: semua data di cloud dihapus dulu, baru akunnya.
+  $('#btnDeleteAcc').onclick = async () => {
+    if (!fb) return;
+    if (!confirm('Hapus akun ' + (fb.user.email || '') + ' beserta SEMUA datanya?\n\nSemua catatan, dompet, dan kategori di akun ini akan hilang dari semua HP. Tidak bisa dibatalkan.')) return;
+    if (!confirm('Yakin? Kalau perlu, batalkan dulu lalu buat Backup.')) return;
+    if (!navigator.onLine) { toast('Butuh koneksi internet untuk menghapus akun'); return; }
+    const { m, fs, user } = fb;
+    try {
+      const t = await user.getIdTokenResult();
+      if (Date.now() - Date.parse(t.authTime) > 5 * 60 * 1000) {
+        alert('Demi keamanan, keluar lalu masuk lagi ke akunmu, kemudian tekan "Hapus akun" lagi (dalam 5 menit).');
+        return;
+      }
+      toast('Menghapus…');
+      unsubs.forEach(u => u()); unsubs = [];
+      const refs = Object.keys(COLS).flatMap(col => db[col].map(d => m.fs.doc(fs, 'users', user.uid, col, d.id)));
+      refs.push(m.fs.doc(fs, 'users', user.uid));
+      for (let i = 0; i < refs.length; i += 400) {
+        const b = m.fs.writeBatch(fs);
+        refs.slice(i, i + 400).forEach(r => b.delete(r));
+        await b.commit();
+      }
+      await user.delete();
+      ls.set(KEY, JSON.stringify({ tx: [], wallets: [], cats: [], budget: 0 }));
+      toast('Akun & semua datanya sudah dihapus');
+    } catch (err) {
+      console.error(err);
+      alert('Gagal menghapus akun (' + (err.code || err.message) + '). Coba keluar lalu masuk lagi, kemudian ulangi.');
+      location.reload();
+    }
   };
   $('#btnLogout').onclick = () => {
     if (!fb || !confirm('Keluar dari akun di HP ini?\n\nData tetap aman di akunmu dan muncul lagi saat kamu masuk.')) return;
@@ -1424,6 +1500,18 @@ nav.tabs .fab svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
     showTab('home');
     toast(create && obSel.size ? 'Siap! Tekan Keluar / Masuk untuk mencatat' : 'Siap! Tekan + untuk mencatat');
   }
+  // ---------- pengingat backup bulanan ----------
+  if (!ls.get('moneysalsa.since')) ls.set('moneysalsa.since', Date.now());
+  const MONTH_MS = 30 * 24 * 3600 * 1000;
+  function backupDue() {
+    if (db.tx.length < 1) return false;
+    const base = Math.max(+ls.get('moneysalsa.lastBackup') || 0, +ls.get('moneysalsa.since') || 0, +ls.get('moneysalsa.backupSnooze') || 0);
+    return Date.now() - base > MONTH_MS;
+  }
+  $('#backupNow').onclick = () => $('#btnBackup').click();
+  // "Nanti" → diingatkan lagi seminggu kemudian.
+  $('#backupLater').onclick = () => { ls.set('moneysalsa.backupSnooze', Date.now() - MONTH_MS + 7 * 24 * 3600 * 1000); render(); };
+
   function closeOnboard() { ls.set('moneysalsa.onboarded', '1'); $('#onboard').classList.add('hidden'); }
   const isNew = () => !ls.get('moneysalsa.onboarded') && !db.tx.length && !db.wallets.length;
 
